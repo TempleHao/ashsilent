@@ -76,6 +76,19 @@ function updateFilters(){$$('.filter').forEach(b=>b.classList.toggle('active',b.
 function copyText(value){if(navigator.clipboard?.writeText){navigator.clipboard.writeText(value).then(()=>toast('已复制到剪贴板。')).catch(()=>fallbackCopy(value))}else fallbackCopy(value)}
 function fallbackCopy(value){const t=document.createElement('textarea');t.value=value;t.style.cssText='position:fixed;left:-2000px';document.body.appendChild(t);t.select();try{document.execCommand('copy');toast('已复制到剪贴板。')}catch{toast('复制失败，请手动选择文本。')}t.remove()}
 function setup(){
+ // The sticky header is always visible, so native #top navigation can
+ // mistakenly treat it as the destination without scrolling the document.
+ // Force an actual scroll to the document origin for both return links.
+ $('a[href="#top"]').forEach(link => link.addEventListener('click', event => {
+   event.preventDefault();
+   if (location.hash) {
+     try { history.replaceState(history.state, '', location.pathname + location.search); }
+     catch (_) { /* A history-restricted browser can still scroll. */ }
+   }
+   const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   try { window.scrollTo({top: 0, left: 0, behavior: reducedMotion ? 'instant' : 'smooth'}); }
+   catch (_) { window.scrollTo(0, 0); }
+ }));
  $$('.mode-btn').forEach(b=>b.addEventListener('click',()=>{mode=b.dataset.mode;store(ROUTE_KEY,mode);expandedStop=getStops()[1]?.id||'enter';renderRoute();renderProgress();toast(`已切换为${mode==='quick'?'精华版':mode==='deep'?'深度版':'全天版'}路线`)}));
  $('#startTime').addEventListener('change',renderRoute);
  $('#resetProgress').addEventListener('click',()=>{if(!confirm('确定要清空全部路线打卡记录吗？文物图鉴打卡不受影响。'))return;checked=[];store(CHECK_KEY,checked);renderRoute();renderProgress();toast('参观进度已重置。')});
