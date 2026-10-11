@@ -14,3 +14,6 @@
 .treasure-meta{align-items:flex-start}
 .photo-source{font-size:10px;line-height:1.6;text-align:right;max-width:65%;text-decoration:underline;text-underline-offset:2px}
 @media(max-width:620px){.treasure-photo{height:260px}.treasure-image-link img{padding:8px}.treasure-meta{gap:14px}.photo-source{max-width:68%}}
+
+/* Anchor at document origin; never target the sticky navigation itself. */
+.page-start-anchor{position:absolute;top:0;left:0;width:1px;height:1px;pointer-events:none;scroll-margin-top:0}
