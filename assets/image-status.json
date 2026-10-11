@@ -1,0 +1,33 @@
+{
+  "expected": 26,
+  "cached": 26,
+  "failed": {},
+  "images": {
+    "fish": "assets/images/fish.webp",
+    "eagle": "assets/images/eagle.webp",
+    "dragon": "assets/images/dragon.webp",
+    "ding": "assets/images/ding.webp",
+    "zun": "assets/images/zun.webp",
+    "li": "assets/images/li.webp",
+    "dayu": "assets/images/dayu.webp",
+    "ice": "assets/images/ice.webp",
+    "passport": "assets/images/passport.webp",
+    "coins": "assets/images/coins.webp",
+    "coins-spade": "assets/images/coins-spade.webp",
+    "stone": "assets/images/stone.webp",
+    "rhino": "assets/images/rhino.webp",
+    "jade": "assets/images/jade.webp",
+    "story": "assets/images/story.webp",
+    "lotus": "assets/images/lotus.webp",
+    "glass": "assets/images/glass.webp",
+    "camel": "assets/images/camel.webp",
+    "tangcoin": "assets/images/tangcoin.webp",
+    "ad": "assets/images/ad.webp",
+    "paper": "assets/images/paper.webp",
+    "porcelain": "assets/images/porcelain.webp",
+    "crown": "assets/images/crown.webp",
+    "vase": "assets/images/vase.webp",
+    "silver": "assets/images/silver.webp",
+    "hero": "assets/images/hero.webp"
+  }
+}
