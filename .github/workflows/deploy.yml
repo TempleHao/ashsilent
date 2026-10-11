@@ -51,6 +51,18 @@ jobs:
           else
             echo "Verified photographs already present in repository"
           fi
+      - name: Persist verified photographs in the repository
+        # GITHUB_TOKEN pushes do not start a second, recursive workflow run.
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images/ assets/image-map.js assets/image-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "assets: store verified museum photographs [skip ci]"
+            git push origin HEAD:master
+          else
+            echo "Photographs are already committed; no external download dependency."
+          fi
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static website
