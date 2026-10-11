@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -40,6 +40,17 @@ jobs:
           assert 'assets/image-map.js' in (root/'index.html').read_text()
           print('PASS: validated',report['cached'],'local images')
           PY
+      - name: Commit optimized photos into repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/images assets/image-map.js assets/image-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "assets: vendor verified museum photographs [skip ci]"
+            git push origin HEAD:master
+          else
+            echo "Verified photographs already present in repository"
+          fi
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload static website
@@ -49,3 +60,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify public website and photo URLs
+        run: |
+          python - <<'PY'
+          import json, time, urllib.request
+          base="https://templehao.github.io/ashsilent/"
+          links=["index.html","assets/image-status.json","assets/images/fish.webp","assets/images/ding.webp","assets/images/crown.webp"]
+          for attempt in range(12):
+              try:
+                  for path in links:
+                      with urllib.request.urlopen(base+path+"?v="+str(attempt),timeout=12) as response:
+                          data=response.read()
+                          if len(data) < 1000: raise ValueError("unexpected short resource: "+path)
+                  print("PUBLIC SMOKE TEST PASS:",len(links),"URLs accessible")
+                  break
+              except Exception as exc:
+                  print("Published website not propagated yet:",str(exc))
+                  if attempt == 11: raise
+                  time.sleep(7)
+          PY
