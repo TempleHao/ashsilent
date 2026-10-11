@@ -42,10 +42,24 @@ function setEra(id,scroll=false){const e=d.eras.find(a=>a.id===id)||d.eras[0],i=
  if(scroll)$('#eraContent').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function renderArtifacts(){
- let a=d.artifacts.filter(o=>filter==='all'||o.group===filter);
- $('#treasureGrid').innerHTML=a.map(o=>{let image=o.image;let src=image?'https://commons.wikimedia.org/wiki/Special:FilePath/'+encodeURIComponent(image)+'?width=700':'';let link=image?'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(image).replace(/%20/g,'_'):'';const done=seen.includes(o.id);
-  return `<article class="treasure-card" id="artifact-${esc(o.id)}"><div class="treasure-photo">${image?`<img src="${esc(src)}" alt="${esc(o.name)}文物照片" loading="lazy" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'object-monogram',textContent:'${esc(o.symbol)}'}))">`:`<span class="object-monogram" aria-hidden="true">${esc(o.symbol)}</span>`}</div><div class="treasure-body"><span class="treasure-era">${esc(o.era)}</span><h3>${esc(o.name)}</h3><p>${esc(o.description)}</p><p style="font-size:11px;color:#d8c49e"><b>现场看点：</b>${esc(o.look)}</p><p style="font-size:11px"><b>注意：</b>${esc(o.note)}</p><div class="treasure-meta"><button class="check-btn ${done?'done':''}" data-object="${esc(o.id)}">${done?'✓ 已看过':'○ 文物打卡'}</button>${image?`<a class="photo-source" href="${esc(link)}" target="_blank" rel="noopener noreferrer" title="查看摄影作者、许可与原文件">图：${esc(o.author)} ↗</a>`:`<span class="photo-source">文字导览 / 无配图</span>`}</div></div></article>`}).join('');
- $$('[data-object]').forEach(b=>b.addEventListener('click',()=>{const id=b.dataset.object;seen=seen.includes(id)?seen.filter(x=>x!==id):[...seen,id];store(OBJECT_KEY,seen);renderArtifacts();toast(seen.includes(id)?'已记录这件文物。':'已取消文物记录。')}));
+ const assets = window.IMAGE_ASSETS || {};
+ const shown = d.artifacts.filter(o=>filter==='all'||o.group===filter);
+ $('#treasureGrid').innerHTML = shown.map(o=>{
+   const meta=assets[o.id]||{};
+   const done=seen.includes(o.id);
+   const photoUrl=meta.src||'';
+   const origin=meta.source || (o.image?'https://commons.wikimedia.org/wiki/File:'+encodeURIComponent(o.image.replace(/ /g,'_')):'');
+   const photo=photoUrl ? '<a class="treasure-image-link" href="'+esc(origin)+'" target="_blank" rel="noopener noreferrer" aria-label="打开'+esc(o.name)+'的原始照片与许可"><img src="'+esc(photoUrl)+'" alt="'+esc(meta.caption||o.name)+'" loading="lazy" decoding="async" onerror="this.closest('.treasure-photo').classList.add('failed')"></a>' : '';
+   const missing = '<div class="picture-unavailable"><span>文物影像暂不可用</span><small>图片未通过本地资源检查，请从来源页查看。</small>'+(origin?'<a href="'+esc(origin)+'" target="_blank" rel="noopener noreferrer">查看原始照片 ↗</a>':'')+'</div>';
+   const credits=origin?'<a class="photo-source" href="'+esc(origin)+'" target="_blank" rel="noopener noreferrer" title="查看照片来源及开放许可">摄影：'+esc(meta.author||o.author||'Wikimedia Commons')+' · '+esc(meta.license||o.license||'查看许可')+' ↗</a>':'<span class="photo-source">待补充馆藏实拍图</span>';
+   return '<article class="treasure-card" id="artifact-'+esc(o.id)+'"><div class="treasure-photo '+(photoUrl?'has-photo':'failed')+'">'+photo+missing+'</div><div class="treasure-body"><span class="treasure-era">'+esc(o.era)+'</span><h3>'+esc(o.name)+'</h3>'+(meta.representative?'<span class="representative-note">专题代表性实物照片</span>':'')+'<p>'+esc(o.description)+'</p><p style="font-size:11px;color:#d8c49e"><b>现场看点：</b>'+esc(o.look)+'</p><p style="font-size:11px"><b>注意：</b>'+esc(o.note)+'</p><div class="treasure-meta"><button class="check-btn '+(done?'done':'')+'" data-object="'+esc(o.id)+'">'+(done?'✓ 已看过':'○ 文物打卡')+'</button>'+credits+'</div></div></article>';
+ }).join('');
+ $$('[data-object]').forEach(b=>b.addEventListener('click',()=>{
+  const id=b.dataset.object;
+  seen=seen.includes(id)?seen.filter(x=>x!==id):[...seen,id];
+  store(OBJECT_KEY,seen);renderArtifacts();
+  toast(seen.includes(id)?'已记录这件文物。':'已取消文物记录。');
+ }));
 }
 function renderEssays(){
  $('#essays').innerHTML=d.essays.map((e,i)=>`<article class="essay"><span class="essay-no">ESSAY / ${String(i+1).padStart(2,'0')}</span><h3>${esc(e.title)}</h3><span class="era-label">${esc(e.subtitle)}</span><p>${esc(e.summary)}</p><div class="deep-para">${e.details.map(t=>`<p>${esc(t)}</p>`).join('')}</div><button class="essay-toggle" type="button" aria-expanded="false">展开阅读全文 ＋</button></article>`).join('');
