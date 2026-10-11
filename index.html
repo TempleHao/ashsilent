@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#141d20">
+  <meta name="description" content="国博漫游：一份可在展厅里实际使用的中国国家博物馆深度导览。8个历史时代、20件重点文物、动态时间规划、历史文化讲解与离线保存的参观进度。">
+  <meta property="og:title" content="国博漫游 · 用一天，走过中国文明">
+  <meta property="og:description" content="中国国家博物馆 6—8 小时深度导览 · 路线规划 × 历史文化 × 文物手册">
+  <meta property="og:type" content="website">
+  <title>国博漫游 · 用一天，走过中国文明</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="data.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">跳转到正文</a>
+<div class="progress-line" id="scrollLine" aria-hidden="true"></div>
+<header class="header" id="top">
+  <div class="header-inner wrap">
+    <a href="#top" class="logo" aria-label="国博漫游，返回顶部"><span class="logo-mark">史</span><span><b>国博漫游</b><small>THE NATIONAL MUSEUM GUIDE</small></span></a>
+    <nav class="desktop-nav" aria-label="网站导航"><a href="#route">路线规划</a><a href="#history">时代长廊</a><a href="#treasures">国宝图鉴</a><a href="#insights">深度阅读</a><a href="#practical">行前准备</a></nav>
+    <div class="header-actions"><button id="searchToggle" class="icon-btn" type="button" aria-label="搜索内容" title="搜索内容">⌕</button><a class="nav-cta" href="#route">开始探索 <span>↗</span></a><button class="icon-btn mobile-menu" id="menuToggle" aria-label="展开导航" aria-expanded="false">☰</button></div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="#route">路线规划</a><a href="#history">时代长廊</a><a href="#treasures">国宝图鉴</a><a href="#insights">深度阅读</a><a href="#practical">行前准备</a></nav>
+</header>
+<main id="main">
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-photo" role="img" aria-label="中国国家博物馆建筑正立面"></div><div class="hero-veiling"></div>
+    <div class="wrap hero-inner">
+      <div class="eyebrow hero-eyebrow"><span class="eyebrow-line"></span> THE NATIONAL MUSEUM OF CHINA <span class="hero-number">NO. 001 / BEIJING</span></div>
+      <h1 id="heroTitle">用一天，<br><em>走过中国文明。</em></h1>
+      <p class="hero-desc">从史前的一抔陶土，到帝国的青铜礼制；从宋代的商业广告，到明清的白银网络。走进国家博物馆，沿着文物的线索，读懂一个文明如何形成、演变与延续。</p>
+      <div class="hero-actions"><a class="btn btn-gold" href="#route">规划我的参观路线 <span>↗</span></a><a class="btn btn-line" href="#history">阅读历史长卷 ↓</a></div>
+      <div class="hero-foot"><div><strong>08</strong><span>历史时代</span></div><i></i><div><strong>20+</strong><span>重要文物</span></div><i></i><div><strong>6—8h</strong><span>深度参观</span></div></div>
+    </div>
+    <div class="hero-side">A JOURNEY THROUGH TIME · 公元前至公元1911年</div>
+    <div class="photo-credit">题图：Shujianyang / Wikimedia Commons（CC0）</div>
+  </section>
+
+  <section class="intro-section pad-section wrap" id="overview">
+    <div class="section-kicker"><span>01 / 序言</span><span>BEFORE YOU BEGIN</span></div>
+    <div class="intro-grid"><div><h2 class="section-title">看见器物，<br><em>理解时代。</em></h2></div><div class="intro-copy"><p>这不是一份只告诉你在哪里拍照的清单。我们以中国古代社会的<strong>制度、技术、财富与文化</strong>为线索，将国博《古代中国》八个历史单元与四个专题展串成一条可以现场使用的参观路线。</p><p>每一站都回答三个问题：当时发生了什么？文物能说明什么？我们又能从中读出怎样的历史逻辑？</p><div class="intro-note"><span>✦</span><div>推荐完整预留 <strong>一整天</strong>。基础展是核心；专题展按精力和兴趣取舍。展柜、馆内动线以及临时闭展以现场为准。</div></div></div></div>
+    <div class="idea-grid"><div class="idea"><span>Ⅰ</span><h3>制度</h3><p>从宗法分封到秦汉官僚帝国，国家怎样组织社会？</p></div><div class="idea"><span>Ⅱ</span><h3>技术</h3><p>从陶器、青铜到瓷器与印刷，生产力怎样改变生活？</p></div><div class="idea"><span>Ⅲ</span><h3>经济</h3><p>从农业剩余到货币和商业网络，财富怎样流动？</p></div><div class="idea"><span>Ⅳ</span><h3>文化</h3><p>信仰、艺术与身份秩序，如何在各个时代不断重组？</p></div></div>
+  </section>
+
+  <section class="route-section pad-section" id="route">
+    <div class="wrap">
+      <div class="section-kicker dark"><span>02 / 路线规划</span><span>YOUR DAY, YOUR PACE</span></div>
+      <div class="section-head"><div><h2 class="section-title light">让时间，<br><em>按历史顺序流动。</em></h2><p class="section-lead light-lead">选择参观强度，即可生成当日时间表。点击任意站点展开讲解，打卡会自动保存到当前设备。</p></div><div class="route-options" role="group" aria-label="选择参观强度"><button class="mode-btn" data-mode="quick" aria-pressed="false"><strong>精华版</strong><small>约4小时</small></button><button class="mode-btn active" data-mode="deep" aria-pressed="true"><strong>深度版</strong><small>约7小时</small></button><button class="mode-btn" data-mode="full" aria-pressed="false"><strong>全天版</strong><small>约8小时</small></button></div></div>
+      <div class="route-tools"><div><label for="startTime">入馆开始时间</label><select id="startTime"><option value="09:00">09:00</option><option value="09:30">09:30</option><option value="10:00">10:00</option><option value="10:30">10:30</option><option value="11:00">11:00</option></select></div><div class="route-total" id="routeTotal">预计 7 小时 30 分钟 · 含入馆与休息</div><button class="outline-mini" id="copyRoute" type="button">复制行程 ↗</button></div>
+      <div class="route-layout"><div class="route-itinerary" id="itinerary"></div><aside class="route-aside"><div class="side-card"><span class="aside-kicker">参观进度 / VISIT PROGRESS</span><div class="progress-circle" id="progressCircle"><span id="progressPercentage">0%</span></div><h3>你的文明旅程</h3><p id="progressText">从第一站开始，记录今天走过的历史。</p><button class="aside-action" id="resetProgress" type="button">重置打卡记录 ↗</button></div><div class="side-quote"><span class="quote-mark">“</span><p>每一件文物，都是历史留下的一次具体回答。</p><span class="aside-mini">GUIDE'S NOTE</span></div></aside></div>
+    </div>
+  </section>
+
+  <section class="history-section pad-section wrap" id="history">
+    <div class="section-kicker"><span>03 / 历史长廊</span><span>EIGHT ERAS OF CIVILIZATION</span></div>
+    <div class="section-head history-head"><div><h2 class="section-title">八个时代，<br><em>一条文明的长河。</em></h2><p class="section-lead">按时间顺序阅读完整的时代背景、政治经济结构、重点文物及现场思考题。选择一个时代，开启这一章。</p></div><div class="calligraphy">史</div></div>
+    <div class="era-nav" id="eraNav" role="tablist" aria-label="选择历史时代"></div>
+    <article class="era-article" id="eraContent" aria-live="polite"></article>
+  </section>
+
+  <section class="treasure-section pad-section" id="treasures">
+    <div class="wrap"><div class="section-kicker dark"><span>04 / 国宝图鉴</span><span>OBJECTS THAT TELL STORIES</span></div><div class="section-head"><div><h2 class="section-title light">让文物，<br><em>开口讲历史。</em></h2><p class="section-lead light-lead">精选重点展品，以时代背景和观察提示展开。部分文物可能轮换展出，不保证每件都能在当日见到。</p></div><div class="filter-bar" id="artifactFilter" role="group" aria-label="筛选文物"><button class="filter active" data-filter="all">全部</button><button class="filter" data-filter="early">先秦</button><button class="filter" data-filter="empire">秦汉至唐</button><button class="filter" data-filter="late">宋元明清</button></div></div>
+    <div class="treasure-grid" id="treasureGrid"></div>
+    </div>
+  </section>
+
+  <section class="insight-section pad-section wrap" id="insights">
+    <div class="section-kicker"><span>05 / 深度阅读</span><span>GO BEYOND THE DISPLAY</span></div>
+    <div class="section-head"><div><h2 class="section-title">走出展柜，<br><em>回到历史的问题。</em></h2><p class="section-lead">将文物连接到政治经济史的真实争论。以下主题适合在休息时间阅读，也适合参观后复盘。</p></div></div>
+    <div class="essays" id="essays"></div>
+  </section>
+
+  <section class="practical-section pad-section" id="practical"><div class="wrap">
+    <div class="section-kicker dark"><span>06 / 行前准备</span><span>VISITOR INFORMATION</span></div><div class="section-head"><div><h2 class="section-title light">带上好奇心，<br><em>也带好这些信息。</em></h2></div></div>
+    <div class="info-grid"><div class="info-main"><div class="visit-list"><div><span>01</span><div><h3>地址与入口</h3><p>北京市东城区东长安街16号。建议通过地铁1号线天安门东站到达，沿现场指引进入北门观众入口。</p></div></div><div><span>02</span><div><h3>开放及预约</h3><p>通常每周一闭馆（节假日安排可能调整）。采取实名、分时段预约，基本陈列免费。开放时间、延时安排、预约提前天数与放票时间可能变化，出行当天以国博官方公告为准。</p></div></div><div><span>03</span><div><h3>证件与安全检查</h3><p>带好预约使用的有效身份证件，预留入馆排队与安检时间。部分大件物品无法携入，先核对官方参观须知。</p></div></div><div><span>04</span><div><h3>观展礼仪</h3><p>文物禁止触摸。摄影需遵守展厅标识；避免闪光灯、自拍杆与三脚架。餐食在指定区域享用。</p></div></div><div><span>05</span><div><h3>讲解与休息</h3><p>可以通过国博官方导览服务核对文物详情。建议每90—120分钟休息一次，专题展可灵活减少。</p></div></div></div></div><aside class="info-side"><div class="ticket-stamp"><div>国家博物馆<br><b>参观备忘</b></div><span>CHINA · BEIJING</span><strong>国博<br>漫游</strong></div><div class="official-links"><h3>官方渠道</h3><a href="https://www.chnmuseum.cn/" target="_blank" rel="noopener noreferrer">国家博物馆官网 <span>↗</span></a><a href="https://www.chnmuseum.cn/portals/0/web/zt/gudai/default.html" target="_blank" rel="noopener noreferrer">《古代中国》官方专题 <span>↗</span></a><a href="https://www.chnmuseum.cn/cg/" target="_blank" rel="noopener noreferrer">参观服务与预约说明 <span>↗</span></a><a href="https://www.chnmuseum.cn/zl/zzzc/" target="_blank" rel="noopener noreferrer">正在展出（临展核实） <span>↗</span></a></div></aside></div>
+    <div class="disclaimer">网站为非官方、独立编写的文化导览，不能替代馆方预约、讲解、实时展陈公告。历史争议处已标注解释范围；展品陈列与楼层动线请服从现场指引。资料核对：2026年10月。</div>
+  </div></section>
+
+  <section class="end-section"><div class="wrap end-inner"><div class="eyebrow">THE END IS ANOTHER BEGINNING</div><h2>一日看千年，<br><em>余味在心间。</em></h2><p>当你离开展厅，不妨回想三个问题：国家如何形成？市场如何发展？一件普通物品，究竟能告诉我们多少关于人的历史？</p><a href="#top" class="btn btn-line">回到旅程起点 ↑</a></div></section>
+</main>
+<footer class="footer"><div class="wrap footer-inner"><div><div class="footer-brand">国博漫游 <span>·</span> A Journey Through Time</div><p>为好奇而行。为理解而看。</p></div><div class="footer-right"><a href="#sources">资料与版权</a><span>© 2026 国博漫游 · 独立导览项目</span></div></div><div class="wrap sources" id="sources"><details><summary>资料来源、图片版权与勘误声明　＋</summary><p>核心展览结构：<a href="https://www.chnmuseum.cn/portals/0/web/zt/gudai/default.html" target="_blank" rel="noopener noreferrer">中国国家博物馆《古代中国》官方专题</a>；重点展厅与专题陈列：<a href="https://www.chnmuseum.cn/" target="_blank" rel="noopener noreferrer">中国国家博物馆官网</a>；参观服务：<a href="https://www.chnmuseum.cn/cg/" target="_blank" rel="noopener noreferrer">馆方参观说明</a>。文史讲解综合公开考古资料与通行历史研究整理，不以单件文物推定所有历史结论。</p><p>图片采用 Wikimedia Commons 开放授权摄影：建筑题图作者 Shujianyang（CC0 1.0）；鹰形陶鼎作者 Anagoria（详见其 Commons 文件授权）；四羊方尊作者 Windmemories（CC BY-SA 4.0）；后母戊鼎作者 Amypaper（CC BY-SA 4.0）。图片均指向原始文件，未作二次衍生；相应文物卡附源文件链接与署名。其他无图卡片采用排版与图形替代，不使用未经许可的文物照片。</p><p>这是独立制作的非官方教育网站。文物展示和放票规则会变化。如发现事实或路线问题，可通过 GitHub 仓库 Issues 提交修订建议。</p></details></div></footer>
+<div class="search-modal" id="searchModal" hidden><div class="search-backdrop" data-close-search></div><div class="search-box" role="dialog" aria-modal="true" aria-label="全站搜索"><button class="search-close" id="searchClose" aria-label="关闭搜索">×</button><div class="search-label">SEARCH / 搜索国博漫游</div><input id="searchInput" placeholder="试试输入：宋代、青铜、货币、凤冠……" autocomplete="off"><div id="searchResults" class="search-results"></div></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="mobile-bottom"><a href="#route">◷ <span>路线</span></a><a href="#history">☷ <span>时代</span></a><a href="#treasures">◇ <span>国宝</span></a><a href="#practical">◎ <span>行前</span></a></div>
+</body>
+</html>
