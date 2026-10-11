@@ -4,11 +4,13 @@
 
 一个专为中国国家博物馆现场参观设计的中文深度导览网站。以《古代中国》八个历史单元为主线，将文物、制度史、经济史与社会生活联系起来，配有三种不同时长的行程、历史阅读、文物图鉴和可留存的个人打卡记录。
 
-## 在线访问
+## 在线访问和自动部署
 
-本仓库可直接作为 GitHub Pages 静态网站发布（首页为根目录的 `index.html`）。仓库地址：<https://github.com/TempleHao/ashsilent>。
-
-> 如果 Pages 还没有开启，仓库内容已具备部署条件；需要在仓库 **Settings → Pages → Build and deployment → Deploy from a branch** 中选择 **`master` / `(root)`** 并保存。站点生效后预计 URL 为 <https://templehao.github.io/ashsilent/>。在 Pages 实际开启之前，请勿将该预期 URL 当作已发布网站。
+- **线上网站：** <https://templehao.github.io/ashsilent/>
+- **GitHub 仓库：** <https://github.com/TempleHao/ashsilent>
+- **GitHub Pages 来源：** Settings → Pages → **GitHub Actions**
+- **自动发布：** 向 `master` 提交代码后，由 `.github/workflows/deploy.yml` 构建和部署。Actions 日志会列出每张文物图的成功／失败状态，部署前自动检查图片文件。
+- **版本：** 1.1.0，变更详见 [CHANGELOG.md](CHANGELOG.md)。
 
 ## 设计理念
 
@@ -26,7 +28,7 @@
 
 - **路线规划**：精华版（190分钟）、深度版（420分钟）、全天版（480分钟），支持改变开始时间，自动计算每一站的起止时间；参观时长均为估算值。
 - **历史长廊**：远古、夏商西周、春秋战国、秦汉、魏晋南北朝、隋唐五代、辽宋夏金元、明清共八个章节，含历史背景、重点文物、思考问题和史料边界说明。
-- **国宝图鉴**：24个文物条目与观展提示，可按历史阶段筛选和打卡；标注已核验的 Wikimedia Commons 配图署名与授权来源。某些专题条目代表类别而非单件藏品。
+- **国宝图鉴**：24个文物条目与观展提示，可按历史阶段筛选和打卡；展示24张真实馆藏或对应专题文物照片，并注明 Wikimedia Commons 摄影、许可与来源。某些专题条目代表类别而非单件藏品。
 - **深度阅读**：国家形成、工业革命与宋代经济、纸币与信用、考古证据的代表性、明清全球贸易等五组扩展文章。
 - **现场实用功能**：可展开的路线站点、复制路线、跨刷新保留参观进度、全站搜索（`Ctrl/⌘ + K`）、移动端快捷导航、跳转按钮。
 - **无后台无跟踪**：纯 HTML/CSS/JavaScript，未接入访问统计、账号或数据库；打卡状态存储在浏览器 `localStorage` 中。
@@ -35,21 +37,24 @@
 
 ```text
 /
-├── index.html         # 页面语义结构与 SEO
-├── style.css          # 视觉风格、响应式布局
-├── data.js            # 八个时代、文物、专题文章、路程数据
-├── app.js             # 路线计算、进度、搜索与打卡交互
-├── favicon.svg        # 自制图标
-├── .nojekyll          # GitHub Pages 构建兼容
-└── README.md          # 项目介绍及发布说明
+├── index.html                # 页面结构及资源加载
+├── style.css                 # 响应式设计、高清文物图库
+├── data.js                   # 8个历史时代、24件/类重点文物、路线数据
+├── app.js                    # 路线、搜索、打卡与图片显示
+├── assets/
+│   ├── image-manifest.json   # 26张图片的原始文件名、出处和许可证
+│   ├── image-map.js          # 构建时生成的本地图片路径与摄影署名
+│   ├── image-status.json     # 构建时生成的图片完整性报告
+│   └── images/*.webp         # 经过验证、优化的真实文物及国博照片
+├── scripts/
+│   └── cache_artifact_images.py
+├── .github/workflows/deploy.yml
+├── CHANGELOG.md              # 各版本更新历史
+├── favicon.svg
+└── README.md
 ```
 
-本项目无外部编译依赖；可用浏览器直接打开 `index.html`，或运行本地静态服务器：
-
-```bash
-python3 -m http.server 8000
-# 浏览 http://localhost:8000/
-```
+代码无需前端框架。持续发布由 GitHub Actions 完成（需要 Python 与 Pillow 处理实拍图片）。本地开发可通过 `python -m pip install pillow && python scripts/cache_artifact_images.py` 先获取图像，然后在项目根目录运行 `python -m http.server 8000`。
 
 ## 信息更新与准确性
 
@@ -63,13 +68,13 @@ python3 -m http.server 8000
 
 ## 图片与授权
 
-首页博物馆建筑照片：**Shujianyang**，`Front of National Museum of China.jpg`，**CC0 1.0**；馆藏图鉴中使用如下公开授权图像，并在图片卡片中注明原作者、链接：
+**V1.1.0 已解决原版图片大量缺失问题。** 原版24件重点文物中，只有3条附有图片地址。现在每条文物卡都有一张经过核对的真实文物实拍照片；另存战国布币照片与博物馆建筑照片，总计26张。
 
-- 鹰形陶鼎：**Anagoria**, `-5000 -3000 Eagle-shaped Pottery Ding National Museum of China anagoria.jpg`，请查原始 Commons 文件授权信息。
-- 后母戊青铜方鼎：**Amypaper**, `Houmuwu Ding or Simuwu Ding.jpg`，**CC BY-SA**，以文件原页为准。
-- 四羊青铜方尊：**Windmemories**, `20251026 Four-goat Square Zun 01.jpg`，**CC BY-SA 4.0**。
-
-图片通过 Wikimedia Commons `Special:FilePath` 加载；未将它们重新打包或改绘。其余文物卡采用文字与图形而非未经许可的馆方照片。
+- 图片来源：Wikimedia Commons 上公开授权的实物摄影作品。完整清单、文件原名、作者、许可和图注在 [assets/image-manifest.json](assets/image-manifest.json)。
+- 授权包括 CC BY-SA 3.0、CC BY-SA 4.0 和 CC0。每张图的卡片都展示原摄影作者与许可证，点击链接可核实和查看原文件。请按照相应 CC 协议署名、链接许可并说明图像经过尺寸调整。
+- 图片在部署时下载到本地、检测文件真实性、缩放并压缩为 WebP，再随同网站文件发布到 GitHub Pages。**用户访问时加载的是本站 `assets/images/*.webp`，不再依赖跨境访问图片源站。** 构建日志检查26张图片，若大范围失败则阻止发布残缺版本。
+- 图片为摄影作品的缩放和 WebP 格式转换，文物画面未使用 AI 合成。某些专题条目配图为对应类别的代表性实物，不应误解为唯一实物。
+- 是否在现场展出仍然取决于当日国博轮展和开放状态。
 
 ## 局限与免责声明
 
