@@ -52,6 +52,12 @@ jobs:
           assert """$('a[href="#top"]')""" in js and "window.scrollTo({top: 0" in js
           print('PASS: document-start anchor and return-to-top click handler')
           PY
+      - name: Install browser test tools
+        run: |
+          python -m pip install --disable-pip-version-check playwright
+          python -m playwright install --with-deps chromium
+      - name: Smoke-test interactive controls in Chromium
+        run: python scripts/test_interactions.py
       - name: Prepare image processing
         run: python -m pip install --disable-pip-version-check pillow
       - name: Cache and validate relic photographs
