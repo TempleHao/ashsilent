@@ -49,7 +49,7 @@ jobs:
           parser.feed(html)
           assert parser.start_ids == [('span', 'page-start-anchor')], parser.start_ids
           assert parser.return_links >= 2, parser.return_links
-          assert """$('a[href="#top"]')""" in js and "window.scrollTo({top: 0" in js
+          assert """$$('a[href="#top"]')""" in js and "window.scrollTo({top: 0" in js
           print('PASS: document-start anchor and return-to-top click handler')
           PY
       - name: Install browser test tools

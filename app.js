@@ -79,7 +79,7 @@ function setup(){
  // The sticky header is always visible, so native #top navigation can
  // mistakenly treat it as the destination without scrolling the document.
  // Force an actual scroll to the document origin for both return links.
- $('a[href="#top"]').forEach(link => link.addEventListener('click', event => {
+ $$('a[href="#top"]').forEach(link => link.addEventListener('click', event => {
    event.preventDefault();
    if (location.hash) {
      try { history.replaceState(history.state, '', location.pathname + location.search); }
